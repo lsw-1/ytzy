@@ -1,0 +1,51 @@
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+<?import javafx.scene.text.*?>
+<?import java.util.ArrayList?>
+<VBox stylesheets="/main.css"
+      fx:controller="sample.Controller"
+      xmlns:fx="http://javafx.com/fxml"
+      fx:id="container">
+
+    <Button text="DEBUG"/>
+
+    <Label fx:id="title" text="YATZY"/>
+
+
+    <HBox fx:id="dices">
+        <Button fx:id="buttonone" text=" " onMouseClicked="#selectDices"/>
+        <Button fx:id="buttontwo" text=" "/>
+        <Button fx:id="buttonthree" text=" "/>
+        <Button fx:id="buttonfour" text=" "/>
+        <Button fx:id="buttonfive" text=" "/>
+
+        <fx:define>
+            <ArrayList fx:id="diceList">
+                <fx:reference source="buttonone"/>
+                <fx:reference source="buttontwo"/>
+                <fx:reference source="buttonthree"/>
+                <fx:reference source="buttonfour"/>
+                <fx:reference source="buttonfive"/>
+            </ArrayList>
+        </fx:define>
+    </HBox>
+
+    <GridPane fx:id="scoreboard" hgap="20" vgap="10">
+        <Button text="TVÅ PAR" GridPane.rowIndex="0" GridPane.columnIndex="0"/>
+        <Button text="TRISS" GridPane.rowIndex="1" GridPane.columnIndex="0"/>
+        <Button text="FYRTAL" GridPane.rowIndex="2" GridPane.columnIndex="0"/>
+        <Button text="KÅK" GridPane.rowIndex="3" GridPane.columnIndex="0"/>
+        <Button text="YATZY" GridPane.rowIndex="4" GridPane.columnIndex="0"/>
+        <Button text="HELTAL" GridPane.rowIndex="5" GridPane.columnIndex="0"/>
+
+        <Text text="00" GridPane.rowIndex="0" GridPane.columnIndex="1" />
+        <Text text="00" GridPane.rowIndex="1" GridPane.columnIndex="1"/>
+        <Text text="00" GridPane.rowIndex="2" GridPane.columnIndex="1"/>
+        <Text text="00" GridPane.rowIndex="3" GridPane.columnIndex="1"/>
+        <Text text="00" GridPane.rowIndex="4" GridPane.columnIndex="1"/>
+        <Text text="00" GridPane.rowIndex="5" GridPane.columnIndex="1"/>
+    </GridPane>
+
+    <Button fx:id="playbutton" text="Throw Dices" onAction="#throwAllDices"/>
+
+</VBox>
