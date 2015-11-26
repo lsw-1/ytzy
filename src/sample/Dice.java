@@ -1,7 +1,9 @@
 package sample;
 
 import javafx.fxml.FXML;
+import javafx.scene.control.Button;
 
+import java.util.List;
 import java.util.Random;
 
 /**
@@ -10,11 +12,24 @@ import java.util.Random;
 public class Dice {
     private int mValue;
     private int mOrder;
-    private FXML mButton;
+    private boolean mStatus;
 
     public Dice(int order) {
         mValue = 0;
         mOrder = order;
+        mStatus = true;
+    }
+
+    public boolean isStatus() {
+        return mStatus;
+    }
+
+    public int getOrder() {
+        return mOrder;
+    }
+
+    public void setStatus(boolean status) {
+        mStatus = status;
     }
 
     public int getValue() {
@@ -30,21 +45,19 @@ public class Dice {
         return "Die " + mOrder + " value of " + mValue;
     }
 
-    public void rollDice()
+    public void rollDice(boolean status, int i)
     {
         int value;
         Random random = new Random();
-        value = random.nextInt(6)+1;
-        System.out.println(value);
-        setValue(value);
-
-    }
-
-    public void showDiePicture(int value){
-        switch (value){
-            case 1:
+        if (status == true){
+            value = random.nextInt(6)+1;
+            System.out.println(value);
+            setValue(value);
         }
+
+
     }
+
 
 
 }

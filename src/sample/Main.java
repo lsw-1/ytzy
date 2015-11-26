@@ -14,7 +14,7 @@ public class Main extends Application {
         Font.loadFont(getClass().getResource("/VarelaRound-Regular.ttf").toExternalForm(), 10);
         Parent root = FXMLLoader.load(getClass().getResource("/sample.fxml"));
         primaryStage.setTitle("Yatzy");
-        primaryStage.setScene(new Scene(root, 400, 600));
+        primaryStage.setScene(new Scene(root, 500, 800));
         primaryStage.setResizable(false);
         primaryStage.show();
     }

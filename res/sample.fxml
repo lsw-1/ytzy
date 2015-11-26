@@ -7,17 +7,19 @@
       xmlns:fx="http://javafx.com/fxml"
       fx:id="container">
 
-    <Button text="DEBUG"/>
+    <Button text="DEBUG" onAction="#BUG"/>
+
+    <Text fx:id="message" text=""/>
 
     <Label fx:id="title" text="YATZY"/>
 
 
     <HBox fx:id="dices">
-        <Button fx:id="buttonone" text="??" onMouseClicked="#selectDices"/>
-        <Button fx:id="buttontwo" text="??" />
-        <Button fx:id="buttonthree" text="??"/>
-        <Button fx:id="buttonfour" text="??"/>
-        <Button fx:id="buttonfive" text="??"/>
+        <Button fx:id="buttonone" text="??" onMouseClicked="#handle"/>
+        <Button fx:id="buttontwo" text="??" onMouseClicked="#handle"/>
+        <Button fx:id="buttonthree" text="??" onMouseClicked="#handle"/>
+        <Button fx:id="buttonfour" text="??" onMouseClicked="#handle"/>
+        <Button fx:id="buttonfive" text="??" onMouseClicked="#handle"/>
 
         <fx:define>
             <ArrayList fx:id="diceList">
@@ -31,21 +33,68 @@
     </HBox>
 
     <GridPane fx:id="scoreboard" hgap="20" vgap="10">
-        <Button text="TVÅ PAR" GridPane.rowIndex="0" GridPane.columnIndex="0"/>
-        <Button text="TRISS" GridPane.rowIndex="1" GridPane.columnIndex="0"/>
-        <Button text="FYRTAL" GridPane.rowIndex="2" GridPane.columnIndex="0"/>
-        <Button text="KÅK" GridPane.rowIndex="3" GridPane.columnIndex="0"/>
-        <Button text="YATZY" GridPane.rowIndex="4" GridPane.columnIndex="0"/>
-        <Button text="HELTAL" GridPane.rowIndex="5" GridPane.columnIndex="0"/>
+        <Button text="ETTOR" GridPane.rowIndex="0" GridPane.columnIndex="0" onAction="#tvaPar"/>
+        <Button text="TVÅOR" GridPane.rowIndex="1" GridPane.columnIndex="0" onAction="#tvaPar"/>
+        <Button text="TREOR" GridPane.rowIndex="2" GridPane.columnIndex="0" onAction="#tvaPar"/>
+        <Button text="FYROR" GridPane.rowIndex="3" GridPane.columnIndex="0" onAction="#tvaPar"/>
+        <Button text="FEMMOR" GridPane.rowIndex="4" GridPane.columnIndex="0" onAction="#tvaPar"/>
+        <Button text="SEXOR" GridPane.rowIndex="5" GridPane.columnIndex="0" onAction="#tvaPar"/>
+        <Button text="ETT PAR" GridPane.rowIndex="6" GridPane.columnIndex="0" onAction="#tvaPar"/>
+        <Button text="TVÅ PAR" GridPane.rowIndex="7" GridPane.columnIndex="0" onAction="#tvaPar"/>
+        <Button  text="TRISS" GridPane.rowIndex="8" GridPane.columnIndex="0"/>
+        <Button text="TRETAL" GridPane.rowIndex="9" GridPane.columnIndex="0" onAction="#tvaPar"/>
+        <Button text="FYRTAL" GridPane.rowIndex="10" GridPane.columnIndex="0"/>
+        <Button text="LITEN STRAIGHT" GridPane.rowIndex="11" GridPane.columnIndex="0" onAction="#tvaPar"/>
+        <Button text="STOR STRAIGHT" GridPane.rowIndex="12" GridPane.columnIndex="0" onAction="#tvaPar"/>
+        <Button text="KÅK" GridPane.rowIndex="13" GridPane.columnIndex="0"/>
+        <Button text="YATZY" GridPane.rowIndex="14" GridPane.columnIndex="0"/>
+        <Button text="CHANS" GridPane.rowIndex="15" GridPane.columnIndex="0"/>
 
-        <Text text="00" GridPane.rowIndex="0" GridPane.columnIndex="1" />
+        <!--SPELARE 1-->
+
+        <Text fx:id="tvapar" text="00" GridPane.rowIndex="0" GridPane.columnIndex="1"/>
         <Text text="00" GridPane.rowIndex="1" GridPane.columnIndex="1"/>
         <Text text="00" GridPane.rowIndex="2" GridPane.columnIndex="1"/>
         <Text text="00" GridPane.rowIndex="3" GridPane.columnIndex="1"/>
         <Text text="00" GridPane.rowIndex="4" GridPane.columnIndex="1"/>
         <Text text="00" GridPane.rowIndex="5" GridPane.columnIndex="1"/>
+        <Text text="00" GridPane.rowIndex="6" GridPane.columnIndex="1"/>
+        <Text text="00" GridPane.rowIndex="7" GridPane.columnIndex="1"/>
+        <Text text="00" GridPane.rowIndex="8" GridPane.columnIndex="1"/>
+        <Text text="00" GridPane.rowIndex="9" GridPane.columnIndex="1"/>
+        <Text text="00" GridPane.rowIndex="10" GridPane.columnIndex="1"/>
+        <Text text="00" GridPane.rowIndex="11" GridPane.columnIndex="1"/>
+        <Text text="00" GridPane.rowIndex="12" GridPane.columnIndex="1"/>
+        <Text text="00" GridPane.rowIndex="13" GridPane.columnIndex="1"/>
+        <Text text="00" GridPane.rowIndex="14" GridPane.columnIndex="1"/>
+        <Text text="00" GridPane.rowIndex="15" GridPane.columnIndex="1"/>
+
+        <!--SPELARE 2-->
+
+        <Text fx:id="tvapar" text="00" GridPane.rowIndex="0" GridPane.columnIndex="2"/>
+        <Text text="00" GridPane.rowIndex="1" GridPane.columnIndex="2"/>
+        <Text text="00" GridPane.rowIndex="2" GridPane.columnIndex="2"/>
+        <Text text="00" GridPane.rowIndex="3" GridPane.columnIndex="2"/>
+        <Text text="00" GridPane.rowIndex="4" GridPane.columnIndex="2"/>
+        <Text text="00" GridPane.rowIndex="5" GridPane.columnIndex="2"/>
+        <Text text="00" GridPane.rowIndex="6" GridPane.columnIndex="2"/>
+
+        <Text text="00" GridPane.rowIndex="7" GridPane.columnIndex="2"/>
+        <Text text="00" GridPane.rowIndex="8" GridPane.columnIndex="2"/>
+        <Text text="00" GridPane.rowIndex="9" GridPane.columnIndex="2"/>
+        <Text text="00" GridPane.rowIndex="10" GridPane.columnIndex="2"/>
+        <Text text="00" GridPane.rowIndex="11" GridPane.columnIndex="2"/>
+        <Text text="00" GridPane.rowIndex="12" GridPane.columnIndex="2"/>
+        <Text text="00" GridPane.rowIndex="13" GridPane.columnIndex="2"/>
+        <Text text="00" GridPane.rowIndex="14" GridPane.columnIndex="2"/>
+        <Text text="00" GridPane.rowIndex="15" GridPane.columnIndex="2"/>
+
+
     </GridPane>
 
-    <Button fx:id="playbutton" text="Throw Dices" onAction="#rollAllDices"/>
+    <HBox >
+        <Button fx:id="playbutton" text="Throw Dices" onAction="#rollAllDices"/>
+        <Button fx:id="endturn" text="End turn" onAction="#endTurn"/>
+    </HBox>
 
 </VBox>
