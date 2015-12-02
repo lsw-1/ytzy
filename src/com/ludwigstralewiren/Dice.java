@@ -1,4 +1,4 @@
-package sample;
+package com.ludwigstralewiren;
 
 import javafx.fxml.FXML;
 import javafx.scene.control.Button;

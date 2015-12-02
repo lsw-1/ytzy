@@ -1,13 +1,14 @@
 <?import javafx.scene.control.*?>
-<?import javafx.scene.layout.*?>
-<?import javafx.scene.text.*?>
+<?import javafx.scene.control.cell.PropertyValueFactory?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.VBox?>
+<?import javafx.scene.text.Text?>
 <?import java.util.ArrayList?>
 <VBox stylesheets="/main.css"
-      fx:controller="sample.Controller"
+      fx:controller="com.ludwigstralewiren.Controller"
       xmlns:fx="http://javafx.com/fxml"
       fx:id="container">
-
-    <Button text="DEBUG" onAction="#BUG"/>
+    <Button fx:id="BUG" text="BUG" onAction="#BUG"/>
 
     <Text fx:id="message" text=""/>
 
@@ -32,67 +33,35 @@
         </fx:define>
     </HBox>
 
-    <GridPane fx:id="scoreboard" hgap="20" vgap="10">
-        <Button text="ETTOR" GridPane.rowIndex="0" GridPane.columnIndex="0" onAction="#tvaPar"/>
-        <Button text="TVÅOR" GridPane.rowIndex="1" GridPane.columnIndex="0" onAction="#tvaPar"/>
-        <Button text="TREOR" GridPane.rowIndex="2" GridPane.columnIndex="0" onAction="#tvaPar"/>
-        <Button text="FYROR" GridPane.rowIndex="3" GridPane.columnIndex="0" onAction="#tvaPar"/>
-        <Button text="FEMMOR" GridPane.rowIndex="4" GridPane.columnIndex="0" onAction="#tvaPar"/>
-        <Button text="SEXOR" GridPane.rowIndex="5" GridPane.columnIndex="0" onAction="#tvaPar"/>
-        <Button text="ETT PAR" GridPane.rowIndex="6" GridPane.columnIndex="0" onAction="#tvaPar"/>
-        <Button text="TVÅ PAR" GridPane.rowIndex="7" GridPane.columnIndex="0" onAction="#tvaPar"/>
-        <Button  text="TRISS" GridPane.rowIndex="8" GridPane.columnIndex="0"/>
-        <Button text="TRETAL" GridPane.rowIndex="9" GridPane.columnIndex="0" onAction="#tvaPar"/>
-        <Button text="FYRTAL" GridPane.rowIndex="10" GridPane.columnIndex="0"/>
-        <Button text="LITEN STRAIGHT" GridPane.rowIndex="11" GridPane.columnIndex="0" onAction="#tvaPar"/>
-        <Button text="STOR STRAIGHT" GridPane.rowIndex="12" GridPane.columnIndex="0" onAction="#tvaPar"/>
-        <Button text="KÅK" GridPane.rowIndex="13" GridPane.columnIndex="0"/>
-        <Button text="YATZY" GridPane.rowIndex="14" GridPane.columnIndex="0"/>
-        <Button text="CHANS" GridPane.rowIndex="15" GridPane.columnIndex="0"/>
+    <TableView fx:id="myBoard">
+        <columns>
 
-        <!--SPELARE 1-->
+            <TableColumn text="Scores" prefWidth="150" resizable="false">
+                <cellValueFactory>
+                    <PropertyValueFactory property="typeOfScore" fx:id="typescore"/>
+                </cellValueFactory>
+            </TableColumn>
 
-        <Text fx:id="tvapar" text="00" GridPane.rowIndex="0" GridPane.columnIndex="1"/>
-        <Text text="00" GridPane.rowIndex="1" GridPane.columnIndex="1"/>
-        <Text text="00" GridPane.rowIndex="2" GridPane.columnIndex="1"/>
-        <Text text="00" GridPane.rowIndex="3" GridPane.columnIndex="1"/>
-        <Text text="00" GridPane.rowIndex="4" GridPane.columnIndex="1"/>
-        <Text text="00" GridPane.rowIndex="5" GridPane.columnIndex="1"/>
-        <Text text="00" GridPane.rowIndex="6" GridPane.columnIndex="1"/>
-        <Text text="00" GridPane.rowIndex="7" GridPane.columnIndex="1"/>
-        <Text text="00" GridPane.rowIndex="8" GridPane.columnIndex="1"/>
-        <Text text="00" GridPane.rowIndex="9" GridPane.columnIndex="1"/>
-        <Text text="00" GridPane.rowIndex="10" GridPane.columnIndex="1"/>
-        <Text text="00" GridPane.rowIndex="11" GridPane.columnIndex="1"/>
-        <Text text="00" GridPane.rowIndex="12" GridPane.columnIndex="1"/>
-        <Text text="00" GridPane.rowIndex="13" GridPane.columnIndex="1"/>
-        <Text text="00" GridPane.rowIndex="14" GridPane.columnIndex="1"/>
-        <Text text="00" GridPane.rowIndex="15" GridPane.columnIndex="1"/>
+            <TableColumn text="Player 1" prefWidth="110">
+                <cellValueFactory>
+                    <PropertyValueFactory property="playerOnePoints"/>
+                </cellValueFactory>
+            </TableColumn>
 
-        <!--SPELARE 2-->
+            <TableColumn text="Player 2" prefWidth="110">
+                <cellValueFactory>
+                    <PropertyValueFactory property="playerTwoPoints"/>
+                </cellValueFactory>
+            </TableColumn>
 
-        <Text fx:id="tvapar" text="00" GridPane.rowIndex="0" GridPane.columnIndex="2"/>
-        <Text text="00" GridPane.rowIndex="1" GridPane.columnIndex="2"/>
-        <Text text="00" GridPane.rowIndex="2" GridPane.columnIndex="2"/>
-        <Text text="00" GridPane.rowIndex="3" GridPane.columnIndex="2"/>
-        <Text text="00" GridPane.rowIndex="4" GridPane.columnIndex="2"/>
-        <Text text="00" GridPane.rowIndex="5" GridPane.columnIndex="2"/>
-        <Text text="00" GridPane.rowIndex="6" GridPane.columnIndex="2"/>
-
-        <Text text="00" GridPane.rowIndex="7" GridPane.columnIndex="2"/>
-        <Text text="00" GridPane.rowIndex="8" GridPane.columnIndex="2"/>
-        <Text text="00" GridPane.rowIndex="9" GridPane.columnIndex="2"/>
-        <Text text="00" GridPane.rowIndex="10" GridPane.columnIndex="2"/>
-        <Text text="00" GridPane.rowIndex="11" GridPane.columnIndex="2"/>
-        <Text text="00" GridPane.rowIndex="12" GridPane.columnIndex="2"/>
-        <Text text="00" GridPane.rowIndex="13" GridPane.columnIndex="2"/>
-        <Text text="00" GridPane.rowIndex="14" GridPane.columnIndex="2"/>
-        <Text text="00" GridPane.rowIndex="15" GridPane.columnIndex="2"/>
+        </columns>
 
 
-    </GridPane>
+    </TableView>
 
-    <HBox >
+
+    <HBox>
+        <Button fx:id="addPoints" text="Add Points" onAction="#addPoints"/>
         <Button fx:id="playbutton" text="Throw Dices" onAction="#rollAllDices"/>
         <Button fx:id="endturn" text="End turn" onAction="#endTurn"/>
     </HBox>

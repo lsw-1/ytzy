@@ -1,4 +1,4 @@
-package sample;
+package com.ludwigstralewiren;
 
 import javafx.application.Application;
 import javafx.fxml.FXMLLoader;
@@ -11,10 +11,9 @@ public class Main extends Application {
 
     @Override
     public void start(Stage primaryStage) throws Exception{
-        Font.loadFont(getClass().getResource("/VarelaRound-Regular.ttf").toExternalForm(), 10);
         Parent root = FXMLLoader.load(getClass().getResource("/sample.fxml"));
         primaryStage.setTitle("Yatzy");
-        primaryStage.setScene(new Scene(root, 500, 800));
+        primaryStage.setScene(new Scene(root, 500, 600));
         primaryStage.setResizable(false);
         primaryStage.show();
     }
@@ -24,3 +23,4 @@ public class Main extends Application {
         launch(args);
     }
 }
+
