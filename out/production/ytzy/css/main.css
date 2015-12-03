@@ -7,11 +7,10 @@
 #message{
     -fx-font-size: 15px;
     -fx-font-family: NEOTERICc;
-    -fx-text-fill: white;
 }
 
 #title{
-    -fx-text-fill: #bfbfbf;
+    -fx-text-fill: #ffffff;
     -fx-font-size: 40px;
     -fx-font-family: NEOTERICc;
 }

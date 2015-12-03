@@ -62,20 +62,20 @@ public class Controller implements EventHandler<Event> {
         mAlltheDices.add(dice5);
 
         myViewData.add(new Scores("ETTOR", 0, 0));
-        myViewData.add(new Scores("TVÅOR", 1, 0));
-        myViewData.add(new Scores("TREOR", 1, 0));
-        myViewData.add(new Scores("FYROR", 1, 0));
-        myViewData.add(new Scores("FEMMOR", 1, 0));
-        myViewData.add(new Scores("SEXOR", 1, 0));
-        myViewData.add(new Scores("ETT PAR", 1, 0));
-        myViewData.add(new Scores("TVÅ PAR", 1, 0));
-        myViewData.add(new Scores("FYRTAL", 1, 0));
-        myViewData.add(new Scores("TRETAL", 1, 0));
-        myViewData.add(new Scores("LITEN STRAIGHT", 1, 0));
-        myViewData.add(new Scores("STOR STRAIGHT", 1, 0));
-        myViewData.add(new Scores("KÅK", 1, 0));
-        myViewData.add(new Scores("YATZY", 1, 0));
-        myViewData.add(new Scores("CHANS", 1, 0));
+        myViewData.add(new Scores("TVÅOR", 0, 0));
+        myViewData.add(new Scores("TREOR", 0, 0));
+        myViewData.add(new Scores("FYROR", 0, 0));
+        myViewData.add(new Scores("FEMMOR", 0, 0));
+        myViewData.add(new Scores("SEXOR", 0, 0));
+        myViewData.add(new Scores("ETT PAR", 0, 0));
+        myViewData.add(new Scores("TVÅ PAR", 0, 0));
+        myViewData.add(new Scores("FYRTAL", 0, 0));
+        myViewData.add(new Scores("TRETAL", 0, 0));
+        myViewData.add(new Scores("LITEN STRAIGHT", 0, 0));
+        myViewData.add(new Scores("STOR STRAIGHT", 0, 0));
+        myViewData.add(new Scores("KÅK", 0, 0));
+        myViewData.add(new Scores("YATZY", 0, 0));
+        myViewData.add(new Scores("CHANS", 0, 0));
     }
 
     public List<Integer> getAllValues() {
@@ -83,6 +83,7 @@ public class Controller implements EventHandler<Event> {
     }
 
     public void initialize() {
+        endturn.setDisable(true);
         myBoard.setItems(myViewData);
 
     }
@@ -102,6 +103,7 @@ public class Controller implements EventHandler<Event> {
         mCount++;
         if (mCount == 3) {
             getDiceValues();
+            endturn.setDisable(false);
         }
     }
 
@@ -125,6 +127,7 @@ public class Controller implements EventHandler<Event> {
     }
 
     public void endTurn(ActionEvent event) {
+        endturn.setDisable(true);
         mCount = 0;
         for (int i = 0; i < 5; i++) {
             diceList.get(i).setText("??");
