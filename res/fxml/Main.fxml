@@ -4,11 +4,10 @@
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Text?>
 <?import java.util.ArrayList?>
-<VBox stylesheets="/main.css"
-      fx:controller="com.ludwigstralewiren.Controller"
+<VBox stylesheets="/css/main.css"
+      fx:controller="com.ludwigstralewiren.Controller.Controller"
       xmlns:fx="http://javafx.com/fxml"
       fx:id="container">
-    <Button fx:id="BUG" text="BUG" onAction="#BUG"/>
 
     <Text fx:id="message" text=""/>
 
@@ -61,7 +60,7 @@
 
 
     <HBox>
-        <Button fx:id="addPoints" text="Add Points" onAction="#addPoints"/>
+        <Button fx:id="addpoints" text="Add Points" onAction="#addPoints"/>
         <Button fx:id="playbutton" text="Throw Dices" onAction="#rollAllDices"/>
         <Button fx:id="endturn" text="End turn" onAction="#endTurn"/>
     </HBox>

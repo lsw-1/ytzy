@@ -1,6 +1,8 @@
-package com.ludwigstralewiren;
+package com.ludwigstralewiren.Controller;
 
-import javafx.beans.value.ObservableValue;
+import com.ludwigstralewiren.Model.Dice;
+import com.ludwigstralewiren.Model.ScoreCombos;
+import com.ludwigstralewiren.Model.Scores;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
@@ -12,9 +14,7 @@ import javafx.scene.control.TableView;
 import javafx.scene.text.Text;
 
 import java.util.ArrayList;
-import java.util.HashMap;
 import java.util.List;
-import java.util.Map;
 
 public class Controller implements EventHandler<Event> {
 
@@ -27,6 +27,12 @@ public class Controller implements EventHandler<Event> {
     private ObservableList<Scores> myViewData = FXCollections.observableArrayList();
     @FXML
     private Text message;
+    @FXML
+    private Button addpoints;
+    @FXML
+    private Button playbutton;
+    @FXML
+    private Button endturn;
 
 
     Dice dice1 = new Dice(1);
@@ -38,19 +44,16 @@ public class Controller implements EventHandler<Event> {
 
     private ScoreCombos mScoreCombos;
     private List<Dice> mAlltheDices;
-    private List<Integer> allValues;
-    private int count = 0;
-    private int turn = 0;
-    private Map<String, Integer> players;
+    private List<Integer> mAllValues;
+    private int mCount = 0;
+    private int mTurn = 0;
     private boolean played = false;
 
 
     public Controller() {
         mScoreCombos = new ScoreCombos();
-        players = new HashMap<>();
-
         mAlltheDices = new ArrayList<>();
-        allValues = new ArrayList<>();
+        mAllValues = new ArrayList<>();
 
         mAlltheDices.add(dice1);
         mAlltheDices.add(dice2);
@@ -59,24 +62,24 @@ public class Controller implements EventHandler<Event> {
         mAlltheDices.add(dice5);
 
         myViewData.add(new Scores("ETTOR", 0, 0));
-        myViewData.add(new Scores("TVÅOR", 0, 0));
-        myViewData.add(new Scores("TREOR", 0, 0));
-        myViewData.add(new Scores("FYROR", 0, 0));
-        myViewData.add(new Scores("FEMMOR", 0, 0));
-        myViewData.add(new Scores("SEXOR", 0, 0));
-        myViewData.add(new Scores("ETT PAR", 0, 0));
-        myViewData.add(new Scores("TVÅ PAR", 0, 0));
-        myViewData.add(new Scores("FYRTAL", 0, 0));
-        myViewData.add(new Scores("TRETAL", 0, 0));
-        myViewData.add(new Scores("LITEN STRAIGHT", 0, 0));
-        myViewData.add(new Scores("STOR STRAIGHT", 0, 0));
-        myViewData.add(new Scores("KÅK", 0, 0));
-        myViewData.add(new Scores("YATZY", 0, 0));
-        myViewData.add(new Scores("CHANS", 0, 0));
+        myViewData.add(new Scores("TVÅOR", 1, 0));
+        myViewData.add(new Scores("TREOR", 1, 0));
+        myViewData.add(new Scores("FYROR", 1, 0));
+        myViewData.add(new Scores("FEMMOR", 1, 0));
+        myViewData.add(new Scores("SEXOR", 1, 0));
+        myViewData.add(new Scores("ETT PAR", 1, 0));
+        myViewData.add(new Scores("TVÅ PAR", 1, 0));
+        myViewData.add(new Scores("FYRTAL", 1, 0));
+        myViewData.add(new Scores("TRETAL", 1, 0));
+        myViewData.add(new Scores("LITEN STRAIGHT", 1, 0));
+        myViewData.add(new Scores("STOR STRAIGHT", 1, 0));
+        myViewData.add(new Scores("KÅK", 1, 0));
+        myViewData.add(new Scores("YATZY", 1, 0));
+        myViewData.add(new Scores("CHANS", 1, 0));
     }
 
     public List<Integer> getAllValues() {
-        return allValues;
+        return mAllValues;
     }
 
     public void initialize() {
@@ -88,7 +91,7 @@ public class Controller implements EventHandler<Event> {
 //    DICE METHODS
 
     public void rollAllDices(ActionEvent event) {
-        if (count < 3) {
+        if (mCount < 3) {
             for (int i = 0; i < 5; i++) {
                 mAlltheDices.get(i).rollDice(mAlltheDices.get(i).isStatus(), i);
                 int diceVal = mAlltheDices.get(i).getValue();
@@ -96,8 +99,8 @@ public class Controller implements EventHandler<Event> {
                 diceList.get(i).setText(stringVal);
             }
         }
-        count++;
-        if (count == 3) {
+        mCount++;
+        if (mCount == 3) {
             getDiceValues();
         }
     }
@@ -122,7 +125,7 @@ public class Controller implements EventHandler<Event> {
     }
 
     public void endTurn(ActionEvent event) {
-        count = 0;
+        mCount = 0;
         for (int i = 0; i < 5; i++) {
             diceList.get(i).setText("??");
         }
@@ -131,8 +134,8 @@ public class Controller implements EventHandler<Event> {
         }
 
         played = false;
-        turn++;
-        if(turn % 2 == 0){
+        mTurn++;
+        if (mTurn % 2 == 0) {
             message.setText("Första spelares tur");
         } else {
             message.setText("Andra spelares tur");
@@ -142,9 +145,9 @@ public class Controller implements EventHandler<Event> {
     }
 
     public void getDiceValues() {
-        allValues.clear();
+        mAllValues.clear();
         for (int i = 0; i < 5; i++) {
-            allValues.add(mAlltheDices.get(i).getValue());
+            mAllValues.add(mAlltheDices.get(i).getValue());
         }
 
     }
@@ -152,11 +155,6 @@ public class Controller implements EventHandler<Event> {
 //    TABLEVIEW METHODS
 
     public void BUG(ActionEvent event) {
-        Integer sum = 0;
-        List<Integer> values = new ArrayList<>();
-        for (int i = 0; i < 14; i++) {
-            ObservableValue<?> val = myBoard.getColumns().get(1).getCellObservableValue(i);
-        }
     }
 
 
@@ -171,16 +169,17 @@ public class Controller implements EventHandler<Event> {
 
 
     public void addPoints(ActionEvent event) {
+
         if (played == false) {
-            if (turn % 2 == 0) {
+            if (mTurn % 2 == 0) {
                 if (getScoreObject().getPlayerOnePoints() == 0 && getIndex() < 6) {
-                    getScoreObject().setPlayerOnePoints(mScoreCombos.singleValuePoints(allValues, myBoard.getSelectionModel().getSelectedIndex()));
+                    getScoreObject().setPlayerOnePoints(mScoreCombos.singleValuePoints(mAllValues, myBoard.getSelectionModel().getSelectedIndex()));
                 } else if (getScoreObject().getPlayerOnePoints() == 0 && getIndex() == 6) {
                     getScoreObject().setPlayerOnePoints(mScoreCombos.scorePair(dice1.getValue(), dice2.getValue(), dice3.getValue(), dice4.getValue(), dice5.getValue()));
                 } else if (getScoreObject().getPlayerOnePoints() == 0 && getIndex() == 7) {
                     getScoreObject().setPlayerOnePoints(mScoreCombos.twoPair(dice1.getValue(), dice2.getValue(), dice3.getValue(), dice4.getValue(), dice5.getValue()));
                 } else if (getScoreObject().getPlayerOnePoints() == 0 && getIndex() == 8) {
-                    getScoreObject().setPlayerOnePoints(mScoreCombos.four_of_a_kind(dice1.getValue(), dice2.getValue(), dice3.getValue(), dice4.getValue(), dice5.getValue()));
+                    getScoreObject().setPlayerOnePoints(mScoreCombos.fourOfAKind(dice1.getValue(), dice2.getValue(), dice3.getValue(), dice4.getValue(), dice5.getValue()));
                 } else if (getScoreObject().getPlayerOnePoints() == 0 && getIndex() == 9) {
                     getScoreObject().setPlayerOnePoints(mScoreCombos.threeOfAKind(dice1.getValue(), dice2.getValue(), dice3.getValue(), dice4.getValue(), dice5.getValue()));
                 } else if (getScoreObject().getPlayerOnePoints() == 0 && getIndex() == 10) {
@@ -188,7 +187,7 @@ public class Controller implements EventHandler<Event> {
                 } else if (getScoreObject().getPlayerOnePoints() == 0 && getIndex() == 11) {
                     getScoreObject().setPlayerOnePoints(mScoreCombos.largeStraight(dice1.getValue(), dice2.getValue(), dice3.getValue(), dice4.getValue(), dice5.getValue()));
                 } else if (getScoreObject().getPlayerOnePoints() == 0 && getIndex() == 12) {
-                    getScoreObject().setPlayerOnePoints(mScoreCombos.fullHouse(2, 2, 2, 3, 3));
+                    getScoreObject().setPlayerOnePoints(mScoreCombos.fullHouse(dice1.getValue(), dice2.getValue(), dice3.getValue(), dice4.getValue(), dice5.getValue()));
                 } else if (getScoreObject().getPlayerOnePoints() == 0 && getIndex() == 13) {
                     getScoreObject().setPlayerOnePoints(mScoreCombos.yatzy(dice1.getValue(), dice2.getValue(), dice3.getValue(), dice4.getValue(), dice5.getValue()));
                 } else if (getScoreObject().getPlayerOnePoints() == 0 && getIndex() == 14) {
@@ -198,13 +197,13 @@ public class Controller implements EventHandler<Event> {
             } else {
 
                 if (getScoreObject().getPlayerTwoPoints() == 0 && getIndex() < 6) {
-                    getScoreObject().setPlayerTwoPoints(mScoreCombos.singleValuePoints(allValues, myBoard.getSelectionModel().getSelectedIndex()));
+                    getScoreObject().setPlayerTwoPoints(mScoreCombos.singleValuePoints(mAllValues, myBoard.getSelectionModel().getSelectedIndex()));
                 } else if (getScoreObject().getPlayerTwoPoints() == 0 && getIndex() == 6) {
                     getScoreObject().setPlayerTwoPoints(mScoreCombos.scorePair(dice1.getValue(), dice2.getValue(), dice3.getValue(), dice4.getValue(), dice5.getValue()));
                 } else if (getScoreObject().getPlayerTwoPoints() == 0 && getIndex() == 7) {
                     getScoreObject().setPlayerTwoPoints(mScoreCombos.twoPair(dice1.getValue(), dice2.getValue(), dice3.getValue(), dice4.getValue(), dice5.getValue()));
                 } else if (getScoreObject().getPlayerTwoPoints() == 0 && getIndex() == 8) {
-                    getScoreObject().setPlayerTwoPoints(mScoreCombos.four_of_a_kind(dice1.getValue(), dice2.getValue(), dice3.getValue(), dice4.getValue(), dice5.getValue()));
+                    getScoreObject().setPlayerTwoPoints(mScoreCombos.fourOfAKind(dice1.getValue(), dice2.getValue(), dice3.getValue(), dice4.getValue(), dice5.getValue()));
                 } else if (getScoreObject().getPlayerTwoPoints() == 0 && getIndex() == 9) {
                     getScoreObject().setPlayerTwoPoints(mScoreCombos.threeOfAKind(dice1.getValue(), dice2.getValue(), dice3.getValue(), dice4.getValue(), dice5.getValue()));
                 } else if (getScoreObject().getPlayerTwoPoints() == 0 && getIndex() == 10) {
@@ -220,11 +219,54 @@ public class Controller implements EventHandler<Event> {
                 }
             }
             played = true;
+            endGame();
         }
     }
 
 
-    public void endGame(){
+    public void endGame() {
+        int sumPlayerOne = 0;
+        int sumPlayerTwo = 0;
+        List<Integer> listValuesOne = new ArrayList<>();
+        List<Integer> listValuesTwo = new ArrayList<>();
+
+
+        for (int i = 0; i < 14; i++) {
+            int val = (Integer) myBoard.getColumns().get(1).getCellObservableValue(i).getValue();
+            if (val != 0)
+                listValuesOne.add(val);
+        }
+        for (int i = 0; i < 14; i++) {
+            int val = (Integer) myBoard.getColumns().get(1).getCellObservableValue(i).getValue();
+            if (val != 0)
+                listValuesTwo.add(val);
+        }
+
+        if (listValuesOne.size() == 14 || listValuesOne.size() == 14) {
+            for (int i = 0; i < 14; i++) {
+                int val = (Integer) myBoard.getColumns().get(1).getCellObservableValue(i).getValue();
+                sumPlayerOne += val;
+            }
+            for (int i = 0; i < 14; i++) {
+                int val = (Integer) myBoard.getColumns().get(2).getCellObservableValue(i).getValue();
+                sumPlayerTwo += val;
+            }
+            if (sumPlayerOne > sumPlayerTwo) {
+                message.setText("Spelare 1 har vunnit med poäng: " + sumPlayerOne + " över spelare 2 poäng: " + sumPlayerTwo);
+            } else {
+                message.setText("Spelare 2 har vunnit med poäng: " + sumPlayerTwo + " över spelare 1 poäng: " + sumPlayerOne);
+            }
+            disableButtons();
+        }
+
+    }
+
+    private void disableButtons() {
+        addpoints.setDisable(true);
+        endturn.setDisable(true);
+        playbutton.setDisable(true);
+
     }
 }
+
 

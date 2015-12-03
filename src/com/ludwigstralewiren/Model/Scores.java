@@ -1,4 +1,4 @@
-package com.ludwigstralewiren;
+package com.ludwigstralewiren.Model;
 
 import javafx.beans.property.SimpleIntegerProperty;
 import javafx.beans.property.SimpleStringProperty;

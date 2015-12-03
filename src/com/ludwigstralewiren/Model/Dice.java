@@ -1,4 +1,4 @@
-package com.ludwigstralewiren;
+package com.ludwigstralewiren.Model;
 
 import javafx.fxml.FXML;
 import javafx.scene.control.Button;

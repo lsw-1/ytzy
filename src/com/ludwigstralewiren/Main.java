@@ -11,7 +11,8 @@ public class Main extends Application {
 
     @Override
     public void start(Stage primaryStage) throws Exception{
-        Parent root = FXMLLoader.load(getClass().getResource("/sample.fxml"));
+        Font.loadFont(getClass().getResource("/fonts/NEOTERICc - Regular DEMO VERSION.ttf").toExternalForm(), 10);
+        Parent root = FXMLLoader.load(getClass().getResource("/fxml/Main.fxml"));
         primaryStage.setTitle("Yatzy");
         primaryStage.setScene(new Scene(root, 500, 600));
         primaryStage.setResizable(false);

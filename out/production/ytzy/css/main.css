@@ -4,9 +4,16 @@
     -fx-background-color:  #595959;
     }
 
+#message{
+    -fx-font-size: 15px;
+    -fx-font-family: NEOTERICc;
+    -fx-text-fill: white;
+}
+
 #title{
     -fx-text-fill: #bfbfbf;
     -fx-font-size: 40px;
+    -fx-font-family: NEOTERICc;
 }
 
 .label {
